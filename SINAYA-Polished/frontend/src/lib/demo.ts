@@ -1,6 +1,6 @@
 import type { ApiResponse } from './api';
 import { demoWeather } from './demoWeather';
-export const demoMode = import.meta.env.DEV && import.meta.env.MODE !== 'test' && import.meta.env.VITE_DEMO_MODE === 'true';
+export const demoMode = import.meta.env.MODE !== 'test' && import.meta.env.VITE_DEMO_MODE === 'true';
 type Row = Record<string, unknown> & { id: string };
 type Store = { farms: Row[]; ponds: Row[]; cycles: Row[]; sensors: Row[]; equipment?: Row[] };
 const key = 'sinaya.local-demo.v1';
