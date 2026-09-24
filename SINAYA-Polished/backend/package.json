@@ -1,0 +1,44 @@
+{
+  "name": "sinaya",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test:api": "npm run build && node --test tests/api.test.mjs",
+    "test:weather": "npm run build && node --test tests/weather.test.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "db:seed": "tsx src/db/seedCatalogs.ts",
+    "db:import-guidance": "tsx src/db/importGuidance.ts",
+    "db:link-user": "tsx src/db/linkUser.ts",
+    "typecheck": "tsc --noEmit",
+    "test:connections": "tsx src/testConnections.ts",
+    "db:check": "tsx src/db/checkConnection.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate --config=drizzle.migrate.config.ts",
+    "db:smoke": "tsx src/db/checkFoundation.ts",
+    "test:db:offline": "node --test tests/database.test.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^18.0.3",
+    "drizzle-orm": "^0.45.3",
+    "express": "^5.2.1",
+    "postgres": "^3.4.9",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.2",
+    "drizzle-kit": "^0.31.11",
+    "supertest": "^7.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

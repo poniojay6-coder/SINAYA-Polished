@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/node": "^26.6.2"
+  },
+  "dependencies": {
+    "@supabase/server": "^1.8.0"
+  }
+}

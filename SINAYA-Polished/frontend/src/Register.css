@@ -1,0 +1,71 @@
+.registration-page { min-height: 100svh; background: #101b38; padding: 36px 0 130px; color-scheme: dark; }
+.registration-shell { width: min(1140px, calc(100% - 64px)); margin: auto; }
+.registration-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 55px; }
+.registration-back { color: var(--muted); font-size: 14px; padding-block: 16px; }
+.registration-back:hover { color: var(--mint); }
+.registration-logos { display: flex; align-items: center; gap: 22px; }
+.registration-logos img { width: 64px; height: 64px; object-fit: contain; }
+.registration-logos img:nth-child(2) { width: 76px; height: 76px; }
+.registration-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 85px; align-items: start; }
+.registration-story { padding-top: 42px; }
+.registration-story h1 { font-size: clamp(42px, 4.6vw, 62px); margin-block: 24px; }
+.registration-story > p:not(.eyebrow) { max-width: 380px; }
+.registration-benefit { display: flex; gap: 18px; margin-top: 28px; }
+.registration-benefit > span { color: var(--mint); border: 1px solid var(--border); width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 11px; flex-shrink: 0; }
+.registration-benefit strong { font-size: 15px; font-weight: 600; }
+.registration-benefit p { font-size: 13px; margin: 6px 0 0; }
+.registration-story .registration-prototype { font-size: 11px; margin-top: 45px; opacity: .8; }
+.registration-card { background: #101b38; border: 1px solid rgba(122,232,212,.22); border-radius: 24px; padding: 36px; box-shadow: 0 20px 60px rgba(0,0,0,.12); }
+.registration-card h2 { font-size: 32px; margin-bottom: 12px; }
+.registration-card h2:focus { outline: none; }
+.registration-card > p:not(.eyebrow) { font-size: 14px; }
+.registration-card fieldset { padding: 0; margin: 28px 0 0; border: 0; min-width: 0; }
+.registration-card label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 18px; }
+.registration-card input:not([type=checkbox]), .registration-card select { display: block; width: 100%; min-width: 0; height: 49px; margin-top: 8px; border: 1px solid rgba(195,214,239,.24); border-radius: 10px; padding: 12px 14px; background: rgba(245,245,245,.035); color: var(--text); font: inherit; font-size: 14px; transition: border-color 160ms ease; }
+.registration-card input::placeholder { color: #9baac2; }
+.registration-card select option { background: #101b38; }
+.registration-card input:focus-visible, .registration-card select:focus-visible, .registration-card summary:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; }
+.registration-card small { display: block; color: var(--muted); font-size: 11px; font-weight: 400; line-height: 1.6; }
+.registration-card #password-help { margin: -10px 0 18px; }
+.password-field { position: relative; }
+.password-field input { padding-right: 70px !important; }
+.password-field button { position: absolute; right: 4px; top: 2px; min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: var(--mint); font-size: 12px; }
+.form-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.registration-card details { margin: 4px 0 20px; }
+.registration-card summary { cursor: pointer; font-size: 12px; color: var(--mint); padding: 8px 0; }
+.registration-card summary span { color: var(--muted); }
+.registration-card details .form-pair { margin-top: 12px; }
+.registration-card .consent-field { display: flex; align-items: flex-start; gap: 12px; font-size: 12px; font-weight: 400; line-height: 1.6; }
+.consent-field input { accent-color: var(--mint); margin: 3px 0 0; width: 18px; height: 18px; flex-shrink: 0; }
+.register-submit { width: 100%; margin-top: 6px; font-size: 14px; }
+.registration-card button:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+.registration-switch { margin-top: 24px; text-align: center; }
+.registration-switch a { color: var(--mint); }
+.registration-card .registration-footnote { border-top: 1px solid var(--border); padding-top: 22px; margin: 24px 0 0; text-align: center; font-size: 11px; }
+.form-message { padding: 14px; border: 1px solid var(--mint); border-radius: 10px; color: var(--text); font-size: 13px; line-height: 1.7; overflow-wrap: anywhere; }
+.form-message button, .registration-signout { display: block; border: 0; background: transparent; color: var(--mint); padding: 12px 0; font-size: 13px; }
+.companion-fish { position: fixed; z-index: 5; bottom: 65px; left: -130px; width: 120px; height: 65px; padding: 0; border: 0; background: transparent; animation: companion-roam 22s linear infinite; animation-delay: -6s; }
+.companion-fish .fish-track { animation: none; pointer-events: none; }
+.companion-fish .fish-swimmer { width: 120px; left: 0; top: 0; }
+.companion.is-following .companion-fish { top: 0; left: 0; bottom: auto; animation: none; }
+.companion.motion-paused .companion-fish { animation-play-state: paused; }
+.companion-controls { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 6; padding: 12px 24px; background: #101b38; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 11px; color: var(--muted); }
+.companion-controls button { border: 0; background: transparent; color: var(--mint); min-height: 36px; font-size: 11px; }
+@keyframes companion-roam { 0% { transform: translateX(0); } 100% { transform: translateX(calc(100vw + 260px)); } }
+@media (max-width: 900px) { .registration-layout { gap: 32px; } .registration-card { padding: 26px; } .registration-story h1 { font-size: 44px; } }
+@media (max-width: 700px) { .registration-shell { width: calc(100% - 36px); } .registration-header { margin-bottom: 26px; gap: 12px; } .registration-logos { gap: 10px; } .registration-logos img { width: 40px; height: 40px; } .registration-logos img:nth-child(2) { width: 48px; height: 48px; } .registration-back { font-size: 12px; } .registration-layout { grid-template-columns: 1fr; gap: 22px; } .registration-story { padding: 0; } .registration-story h1 { font-size: 36px; margin: 14px 0; } .registration-story h1 br { display: none; } .registration-story h1 span::before { content: ' '; } .registration-story > p:not(.eyebrow) { max-width: none; font-size: 14px; } .registration-benefit, .registration-prototype { display: none; } .registration-card { padding: 24px; } .registration-card h2 { font-size: 28px; } .companion-controls { gap: 10px; padding: 8px 14px; flex-wrap: wrap; } .companion-controls > span { flex-basis: 100%; text-align: center; } .companion-fish { bottom: 90px; } }
+@media (max-width: 390px) { .form-pair { grid-template-columns: 1fr; gap: 0; } }
+@media (prefers-reduced-motion: reduce) { .companion-fish, .companion.is-following .companion-fish { top: auto; bottom: 95px; left: 15px; transform: none !important; } .companion-controls button { display: none; } .companion-controls span { font-size: 0; } .companion-controls span::after { content: 'Your pond companion · Reduced motion enabled'; font-size: 11px; } }
+.companion .companion-fish, .companion.is-following .companion-fish { top: 0; left: 0; bottom: auto; animation: none; will-change: transform; }
+.companion-pose { display: block; position: relative; width: 120px; height: 65px; transform-origin: center; }
+.companion .fish-tail { animation-duration: var(--tail-speed, 750ms); }
+@media (prefers-reduced-motion: reduce) { .companion .companion-fish, .companion.is-following .companion-fish { top: auto; bottom: 95px; left: 15px; transform: none !important; } .companion-pose { transform: none !important; } }
+/* Keep address menus to five scrollable rows without moving the form. */
+.registration-card .address-dropdown { position: relative; min-height: 78px; }
+.registration-card .address-dropdown select.address-dropdown-open { position: absolute; top: 20px; left: 0; z-index: 20; height: auto; padding: 0; background: #101b38; box-shadow: 0 12px 28px rgba(0,0,0,.3); }
+.registration-card .address-dropdown select.address-dropdown-open option { min-height: 36px; padding: 9px 12px; }
+.demo-shortcut { margin-left: auto; text-align: right; }
+.demo-shortcut .button { display: inline-grid; grid-template-columns: auto auto; gap: 4px 18px; padding: 13px 22px; font-size: 15px; text-align: left; }
+.demo-shortcut .button small { grid-column: 1 / -1; font-size: 11px; font-weight: 500; }
+.demo-shortcut > span { display: block; margin-top: 8px; color: var(--muted); font-size: 11px; }
+@media(max-width: 600px) { .registration-header:has(.demo-shortcut) { align-items: flex-start; flex-wrap: wrap; gap: 18px; } .demo-shortcut .button { font-size: 13px; padding: 12px 16px; } .demo-shortcut > span { max-width: 210px; line-height: 1.5; } }

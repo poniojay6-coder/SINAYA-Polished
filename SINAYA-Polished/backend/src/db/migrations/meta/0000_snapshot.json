@@ -1,0 +1,840 @@
+{
+  "id": "0588da40-2ef1-494c-97e1-d37d25457e22",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.equipment_catalog": {
+      "name": "equipment_catalog",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "equipment_catalog_name_unique": {
+          "name": "equipment_catalog_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "equipment_catalog_name_nonempty": {
+          "name": "equipment_catalog_name_nonempty",
+          "value": "btrim(\"equipment_catalog\".\"name\") <> ''"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.languages": {
+      "name": "languages",
+      "schema": "",
+      "columns": {
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "native_name": {
+          "name": "native_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "languages_nonempty": {
+          "name": "languages_nonempty",
+          "value": "btrim(\"languages\".\"code\") <> '' AND btrim(\"languages\".\"name\") <> '' AND btrim(\"languages\".\"native_name\") <> ''"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.region_languages": {
+      "name": "region_languages",
+      "schema": "",
+      "columns": {
+        "region_code": {
+          "name": "region_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "language_code": {
+          "name": "language_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "region_languages_language_code_languages_code_fk": {
+          "name": "region_languages_language_code_languages_code_fk",
+          "tableFrom": "region_languages",
+          "tableTo": "languages",
+          "columnsFrom": [
+            "language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "region_languages_region_code_language_code_pk": {
+          "name": "region_languages_region_code_language_code_pk",
+          "columns": [
+            "region_code",
+            "language_code"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "region_languages_region_nonempty": {
+          "name": "region_languages_region_nonempty",
+          "value": "btrim(\"region_languages\".\"region_code\") <> ''"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.species": {
+      "name": "species",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scientific_name": {
+          "name": "scientific_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "species_name_unique": {
+          "name": "species_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "species_name_nonempty": {
+          "name": "species_name_nonempty",
+          "value": "btrim(\"species\".\"name\") <> ''"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.farmer_equipment": {
+      "name": "farmer_equipment",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "farmer_id": {
+          "name": "farmer_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "equipment_id": {
+          "name": "equipment_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "custom_name": {
+          "name": "custom_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "farmer_equipment_farmer_idx": {
+          "name": "farmer_equipment_farmer_idx",
+          "columns": [
+            {
+              "expression": "farmer_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "farmer_equipment_equipment_idx": {
+          "name": "farmer_equipment_equipment_idx",
+          "columns": [
+            {
+              "expression": "equipment_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "farmer_equipment_catalog_unique": {
+          "name": "farmer_equipment_catalog_unique",
+          "columns": [
+            {
+              "expression": "farmer_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "equipment_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "where": "\"farmer_equipment\".\"equipment_id\" IS NOT NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "farmer_equipment_custom_unique": {
+          "name": "farmer_equipment_custom_unique",
+          "columns": [
+            {
+              "expression": "farmer_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "lower(btrim(\"custom_name\"))",
+              "asc": true,
+              "isExpression": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "where": "\"farmer_equipment\".\"custom_name\" IS NOT NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "farmer_equipment_farmer_id_farmers_id_fk": {
+          "name": "farmer_equipment_farmer_id_farmers_id_fk",
+          "tableFrom": "farmer_equipment",
+          "tableTo": "farmers",
+          "columnsFrom": [
+            "farmer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "farmer_equipment_equipment_id_equipment_catalog_id_fk": {
+          "name": "farmer_equipment_equipment_id_equipment_catalog_id_fk",
+          "tableFrom": "farmer_equipment",
+          "tableTo": "equipment_catalog",
+          "columnsFrom": [
+            "equipment_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "farmer_equipment_quantity_positive": {
+          "name": "farmer_equipment_quantity_positive",
+          "value": "\"farmer_equipment\".\"quantity\" > 0"
+        },
+        "farmer_equipment_source": {
+          "name": "farmer_equipment_source",
+          "value": "(\"farmer_equipment\".\"equipment_id\" IS NOT NULL AND \"farmer_equipment\".\"custom_name\" IS NULL) OR (\"farmer_equipment\".\"equipment_id\" IS NULL AND \"farmer_equipment\".\"custom_name\" IS NOT NULL AND btrim(\"farmer_equipment\".\"custom_name\") <> '')"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.farmers": {
+      "name": "farmers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "mobile_number": {
+          "name": "mobile_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region": {
+          "name": "region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "province": {
+          "name": "province",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "municipality_city": {
+          "name": "municipality_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "barangay": {
+          "name": "barangay",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_language_code": {
+          "name": "preferred_language_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sms_consent": {
+          "name": "sms_consent",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "account_status": {
+          "name": "account_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'active'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "farmers_language_idx": {
+          "name": "farmers_language_idx",
+          "columns": [
+            {
+              "expression": "preferred_language_code",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "farmers_preferred_language_code_languages_code_fk": {
+          "name": "farmers_preferred_language_code_languages_code_fk",
+          "tableFrom": "farmers",
+          "tableTo": "languages",
+          "columnsFrom": [
+            "preferred_language_code"
+          ],
+          "columnsTo": [
+            "code"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "farmers_names_nonempty": {
+          "name": "farmers_names_nonempty",
+          "value": "btrim(\"farmers\".\"first_name\") <> '' AND btrim(\"farmers\".\"last_name\") <> ''"
+        },
+        "farmers_mobile_nonempty": {
+          "name": "farmers_mobile_nonempty",
+          "value": "btrim(\"farmers\".\"mobile_number\") <> ''"
+        },
+        "farmers_location_nonempty": {
+          "name": "farmers_location_nonempty",
+          "value": "btrim(\"farmers\".\"region\") <> '' AND btrim(\"farmers\".\"province\") <> '' AND btrim(\"farmers\".\"municipality_city\") <> '' AND btrim(\"farmers\".\"barangay\") <> ''"
+        },
+        "farmers_coordinates": {
+          "name": "farmers_coordinates",
+          "value": "(\"farmers\".\"latitude\" IS NULL AND \"farmers\".\"longitude\" IS NULL) OR (\"farmers\".\"latitude\" IS NOT NULL AND \"farmers\".\"longitude\" IS NOT NULL AND \"farmers\".\"latitude\" BETWEEN -90 AND 90 AND \"farmers\".\"longitude\" BETWEEN -180 AND 180)"
+        },
+        "farmers_status": {
+          "name": "farmers_status",
+          "value": "\"farmers\".\"account_status\" IN ('active', 'inactive', 'suspended')"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.ponds": {
+      "name": "ponds",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "farmer_id": {
+          "name": "farmer_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "numeric(9, 6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "area_m2": {
+          "name": "area_m2",
+          "type": "numeric(14, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "water_type": {
+          "name": "water_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "ponds_farmer_idx": {
+          "name": "ponds_farmer_idx",
+          "columns": [
+            {
+              "expression": "farmer_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ponds_farmer_id_farmers_id_fk": {
+          "name": "ponds_farmer_id_farmers_id_fk",
+          "tableFrom": "ponds",
+          "tableTo": "farmers",
+          "columnsFrom": [
+            "farmer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "ponds_name_nonempty": {
+          "name": "ponds_name_nonempty",
+          "value": "btrim(\"ponds\".\"name\") <> ''"
+        },
+        "ponds_area_positive": {
+          "name": "ponds_area_positive",
+          "value": "\"ponds\".\"area_m2\" > 0 AND \"ponds\".\"area_m2\" <> 'NaN'::numeric"
+        },
+        "ponds_water_type": {
+          "name": "ponds_water_type",
+          "value": "\"ponds\".\"water_type\" IN ('freshwater', 'brackish', 'marine')"
+        },
+        "ponds_coordinates": {
+          "name": "ponds_coordinates",
+          "value": "(\"ponds\".\"latitude\" IS NULL AND \"ponds\".\"longitude\" IS NULL) OR (\"ponds\".\"latitude\" IS NOT NULL AND \"ponds\".\"longitude\" IS NOT NULL AND \"ponds\".\"latitude\" BETWEEN -90 AND 90 AND \"ponds\".\"longitude\" BETWEEN -180 AND 180)"
+        }
+      },
+      "isRLSEnabled": true
+    },
+    "public.stocking_cycles": {
+      "name": "stocking_cycles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "pond_id": {
+          "name": "pond_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "species_id": {
+          "name": "species_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity_stocked": {
+          "name": "quantity_stocked",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stocked_area_m2": {
+          "name": "stocked_area_m2",
+          "type": "numeric(14, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stocking_density_per_m2": {
+          "name": "stocking_density_per_m2",
+          "type": "numeric(20, 6)",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "quantity_stocked::numeric / NULLIF(stocked_area_m2, 0)",
+            "type": "stored"
+          }
+        },
+        "stocking_date": {
+          "name": "stocking_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expected_harvest_date": {
+          "name": "expected_harvest_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "actual_harvest_date": {
+          "name": "actual_harvest_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'active'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "stocking_cycles_pond_idx": {
+          "name": "stocking_cycles_pond_idx",
+          "columns": [
+            {
+              "expression": "pond_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "stocking_cycles_species_idx": {
+          "name": "stocking_cycles_species_idx",
+          "columns": [
+            {
+              "expression": "species_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "stocking_cycles_pond_id_ponds_id_fk": {
+          "name": "stocking_cycles_pond_id_ponds_id_fk",
+          "tableFrom": "stocking_cycles",
+          "tableTo": "ponds",
+          "columnsFrom": [
+            "pond_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        },
+        "stocking_cycles_species_id_species_id_fk": {
+          "name": "stocking_cycles_species_id_species_id_fk",
+          "tableFrom": "stocking_cycles",
+          "tableTo": "species",
+          "columnsFrom": [
+            "species_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "stocking_cycles_quantity_positive": {
+          "name": "stocking_cycles_quantity_positive",
+          "value": "\"stocking_cycles\".\"quantity_stocked\" > 0"
+        },
+        "stocking_cycles_area_positive": {
+          "name": "stocking_cycles_area_positive",
+          "value": "\"stocking_cycles\".\"stocked_area_m2\" > 0 AND \"stocking_cycles\".\"stocked_area_m2\" <> 'NaN'::numeric"
+        },
+        "stocking_cycles_status": {
+          "name": "stocking_cycles_status",
+          "value": "\"stocking_cycles\".\"status\" IN ('active', 'harvested', 'cancelled')"
+        },
+        "stocking_cycles_expected_date": {
+          "name": "stocking_cycles_expected_date",
+          "value": "\"stocking_cycles\".\"expected_harvest_date\" IS NULL OR \"stocking_cycles\".\"expected_harvest_date\" >= \"stocking_cycles\".\"stocking_date\""
+        },
+        "stocking_cycles_actual_date": {
+          "name": "stocking_cycles_actual_date",
+          "value": "\"stocking_cycles\".\"actual_harvest_date\" IS NULL OR \"stocking_cycles\".\"actual_harvest_date\" >= \"stocking_cycles\".\"stocking_date\""
+        },
+        "stocking_cycles_harvest_status": {
+          "name": "stocking_cycles_harvest_status",
+          "value": "(\"stocking_cycles\".\"status\" = 'harvested' AND \"stocking_cycles\".\"actual_harvest_date\" IS NOT NULL) OR (\"stocking_cycles\".\"status\" <> 'harvested' AND \"stocking_cycles\".\"actual_harvest_date\" IS NULL)"
+        }
+      },
+      "isRLSEnabled": true
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

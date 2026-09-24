@@ -1,0 +1,45 @@
+.registration-card.manage-records { max-width: none; margin-bottom: 32px; padding: 30px; }
+.manage-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+.manage-records .manage-heading h2 { margin: 6px 0 0; font-size: 28px; letter-spacing: -.7px; }
+.manage-records .manage-heading .eyebrow { margin: 0; font-size: 10px; }
+.manage-count { flex-shrink: 0; color: #7ae8d4; background: rgba(122,232,212,.07); border: 1px solid rgba(122,232,212,.17); border-radius: 30px; padding: 9px 14px; font-size: 12px; }
+.manage-records > p { font-size: 14px; margin: 12px 0 26px; }
+.manage-records fieldset { min-width: 0; }
+.manage-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; align-items: start; }
+.manage-farm { border: 1px solid rgba(122,232,212,.16); border-radius: 16px; overflow: hidden; background: rgba(16,27,56,.5); }
+.manage-farm-header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px; background: rgba(36,159,147,.06); border-bottom: 1px solid rgba(122,232,212,.12); }
+.manage-name { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.manage-name > div { min-width: 0; }
+.manage-farm-icon { display: grid; place-items: center; flex-shrink: 0; width: 38px; height: 38px; border-radius: 12px; border: 1px solid rgba(122,232,212,.2); color: #7ae8d4; font-size: 23px; }
+.manage-label { display: block; color: #7ae8d4; font-size: 9px; font-weight: 600; letter-spacing: 1.8px; margin-bottom: 5px; }
+.manage-records .manage-name h3 { font-size: 17px; margin: 0 0 4px; overflow-wrap: anywhere; }
+.manage-name small, .manage-pond-name small { color: #9cacc7; font-size: 11px; }
+.manage-pond { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; }
+.manage-pond + .manage-pond { border-top: 1px solid rgba(195,214,239,.08); }
+.manage-pond-name { min-width: 0; }
+.manage-pond-name strong { display: block; font-size: 14px; font-weight: 500; margin-bottom: 5px; overflow-wrap: anywhere; }
+.manage-actions { display: flex; gap: 6px; flex-shrink: 0; }
+.manage-records .manage-actions .button { min-height: 34px; padding: 7px 10px; border-radius: 8px; font-size: 11px; font-weight: 500; line-height: 1.3; box-shadow: none; }
+.manage-actions .button:last-child { border-color: transparent; color: #acbad1; background: transparent; }
+.manage-actions .button:last-child:not(:disabled):hover { color: white; background: rgba(122,232,212,.09); border-color: rgba(122,232,212,.25); }
+.manage-actions .button:disabled { opacity: .35; cursor: not-allowed; }
+.manage-records .manage-note { margin: 18px 0 0; font-size: 12px; line-height: 1.7; color: #9cacc7; }
+.manage-records .manage-empty { padding: 8px 20px; font-size: 13px; }
+.manage-editor, .manage-confirm { margin-top: 24px; border: 1px solid rgba(122,232,212,.24); border-radius: 14px; padding: 24px; background: #101b38; }
+.manage-editor { max-width: 680px; }
+.manage-editor > .button, .manage-confirm > .button { padding: 11px 18px; font-size: 13px; margin-top: 12px; }
+@media(max-width: 1150px) { .manage-grid { grid-template-columns: 1fr; } }
+@media(max-width: 600px) { .registration-card.manage-records { padding: 20px 16px; } .manage-heading { align-items: flex-start; flex-direction: column; gap: 12px; } .manage-records .manage-heading h2 { font-size: 23px; } .manage-farm-header { flex-wrap: wrap; padding: 16px; } .manage-pond { padding: 16px; flex-wrap: wrap; } .manage-pond-name { flex: 1 1 130px; } .manage-editor, .manage-confirm { padding: 16px; } }
+.manage-carousel { display: grid; grid-template-columns: 42px minmax(0, 1fr) 42px; align-items: center; gap: 18px; max-width: 920px; margin: 0 auto; }
+.manage-card-window { overflow: hidden; border-radius: 16px; min-width: 0; }
+.manage-arrow { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(122,232,212,.3); background: rgba(36,159,147,.08); color: #7ae8d4; font-size: 30px; line-height: 1; cursor: pointer; transition: background .2s, transform .2s; }
+.manage-arrow:not(:disabled):hover { background: rgba(122,232,212,.18); transform: scale(1.06); }
+.manage-arrow:disabled { opacity: .25; cursor: default; }
+.manage-arrow:focus-visible { outline: 2px solid #7ae8d4; outline-offset: 4px; }
+.manage-slide { animation: farm-slide-in 420ms cubic-bezier(.22,1,.36,1) both; }
+.manage-slide.from-right { --slide-offset: 65px; }
+.manage-slide.from-left { --slide-offset: -65px; }
+.manage-records .manage-position { text-align: center; color: #7ae8d4; font-size: 12px; letter-spacing: .6px; margin: 16px 0 0; }
+@keyframes farm-slide-in { from { opacity: 0; transform: translateX(var(--slide-offset)); } to { opacity: 1; transform: translateX(0); } }
+@media(max-width: 600px) { .manage-carousel { grid-template-columns: 30px minmax(0,1fr) 30px; gap: 7px; } .manage-arrow { width: 30px; height: 36px; font-size: 24px; } .manage-carousel .manage-farm-header, .manage-carousel .manage-pond { padding: 14px 10px; } .manage-carousel .manage-actions { flex-wrap: wrap; } }
+@media(prefers-reduced-motion: reduce) { .manage-slide { animation: none; } .manage-arrow { transition: none; } }

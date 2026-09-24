@@ -1,0 +1,20 @@
+.sms-scenarios { display: flex; flex-wrap: wrap; gap: 9px; margin: 20px 0; }
+.sms-scenarios button { border: 1px solid #249f93; color: #7ae8d4; background: transparent; border-radius: 20px; padding: 10px 15px; cursor: pointer; font: inherit; font-size: 13px; }
+.sms-scenarios button[aria-pressed=true] { background: #7ae8d4; color: #101b38; }
+.sms-demo-layout { display: grid; grid-template-columns: 1fr minmax(260px, 360px); gap: 30px; align-items: start; }
+.sms-demo h4 { margin: 15px 0; }
+.sms-sample { color: #7ae8d4; }
+.sms-demo-steps { padding-left: 22px; line-height: 2; font-size: 14px; }
+.sms-phone { border: 2px solid #249f93; border-radius: 28px; padding: 22px; background: #101b38; }
+.sms-phone-top { text-align: center; font-size: 13px; padding-bottom: 18px; border-bottom: 1px solid #249f93; }
+.sms-bubble { white-space: pre-wrap; overflow-wrap: anywhere; background: rgba(122,232,212,.12); border-radius: 16px 16px 16px 3px; padding: 16px; line-height: 1.7; }
+.sms-phone-empty { padding: 30px 0; }
+.sms-phone .button { width: 100%; font-size: 13px; }
+.sms-demo button:disabled { opacity: .45; cursor: default; }
+.sms-demo button:focus-visible { outline: 2px solid #7ae8d4; outline-offset: 4px; }
+.sms-log-heading { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-top: 24px; }
+.sms-log { padding-left: 20px; font-size: 13px; }
+.sms-log li { padding: 10px 0; }
+.sms-log summary { cursor: pointer; }
+.sms-log p { white-space: pre-wrap; }
+@media (max-width: 700px) { .sms-demo-layout { grid-template-columns: 1fr; } .sms-phone { width: 100%; box-sizing: border-box; } .sms-log-heading { flex-wrap: wrap; } }

@@ -1,0 +1,52 @@
+import { Router } from "express";
+import type { Database } from "../types/database";
+import { farmerController } from "../controllers/farmer.controller";
+import { farmController } from "../controllers/farm.controller";
+import { pondController } from "../controllers/pond.controller";
+import { stockingController } from "../controllers/stocking.controller";
+import { equipmentController } from "../controllers/equipment.controller";
+import { catalogController } from "../controllers/catalog.controller";
+import { sensorController } from "../controllers/sensor.controller";
+import { weatherController } from "../controllers/weather.controller";
+import { OpenMeteoProvider, type WeatherProvider } from "../services/weather/openMeteo.provider";
+import { workflowController } from '../controllers/workflow.controller';
+
+export function foundationRoutes(db: Database, weatherProvider: WeatherProvider = new OpenMeteoProvider()) {
+  const router = Router();
+  const workflow = workflowController(db, weatherProvider);
+  router.route('/ponds/:pondId/assessments').get(workflow.list).post(workflow.evaluate);
+  router.get('/ponds/:pondId/assessments/:assessmentId', workflow.get);
+  router.route('/ponds/:pondId/assessments/:assessmentId/advisories').get(workflow.advisories).post(workflow.createAdvisory);
+  router.post('/ponds/:pondId/assessments/:assessmentId/advisories/:advisoryId/simulate', workflow.simulate);
+  router.post('/ponds/:pondId/assessments/:assessmentId/advisories/:advisoryId/localization-draft', workflow.draft);
+  router.get('/ponds/:pondId/weather', weatherController(db, weatherProvider));
+  const farmer = farmerController(db);
+  const farm = farmController(db);
+  const pond = pondController(db);
+  const stocking = stockingController(db);
+  const equipment = equipmentController(db);
+  const catalog = catalogController(db);
+  const sensor = sensorController(db);
+  router.route("/ponds/:pondId/sensors").get(sensor.list).post(sensor.register);
+  router.post("/ponds/:pondId/sensors/:id/retire", sensor.retire);
+  router.post("/sensors/:id/readings", sensor.ingest);
+  router.get("/ponds/:pondId/readings", sensor.history);
+  router.get("/ponds/:pondId/readings/latest", sensor.latest);
+
+  router.route("/farmers").get(farmer.list).post(farmer.create);
+  router.route("/farmers/:id").get(farmer.get).patch(farmer.update);
+  router.route("/farmers/:farmerId/equipment").get(equipment.list).post(equipment.create);
+  router.patch("/farmers/:farmerId/equipment/:id", equipment.update);
+  router.route("/farms").get(farm.list).post(farm.create);
+  router.route("/farms/:id").get(farm.get).patch(farm.update);
+  router.route("/farms/:farmId/contacts").get(farm.contacts).post(farm.createContact);
+  router.patch("/farms/:farmId/contacts/:id", farm.updateContact);
+  router.route("/ponds").get(pond.list).post(pond.create);
+  router.route("/ponds/:id").get(pond.get).patch(pond.update);
+  router.route("/stocking-cycles").get(stocking.list).post(stocking.create);
+  router.route("/stocking-cycles/:id").get(stocking.get).patch(stocking.update);
+  router.get("/languages", catalog.languages);
+  router.get("/species", catalog.species);
+  router.get("/equipment", catalog.equipment);
+  return router;
+}

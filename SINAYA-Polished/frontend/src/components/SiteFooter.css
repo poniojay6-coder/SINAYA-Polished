@@ -1,0 +1,10 @@
+.sinaya-footer { width: 100%; margin-top: 48px; background: #101b38; color: #afc1df; padding: 32px 0 100px; }
+.sinaya-footer-identity { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 28px; }
+.sinaya-footer-logos { display: flex; align-items: center; gap: 24px; }
+.sinaya-footer-logos img { width: 58px; height: 58px; object-fit: contain; }
+.sinaya-footer .sinaya-footer-identity p { margin: 0; font-size: 13px; color: #afc1df; }
+.sinaya-footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid rgba(195,214,239,.16); padding-top: 28px; font-size: 12px; }
+.sinaya-developer-credit { border: 1px solid rgba(195,214,239,.16); border-radius: 30px; padding: 12px 18px; }
+.sinaya-developer-credit strong { color: #7ae8d4; }
+.registration-page:has(> .sinaya-footer), .dashboard-page:has(> .sinaya-footer) { padding-bottom: 0; }
+@media(max-width: 650px) { .sinaya-footer-identity, .sinaya-footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: 20px; } .sinaya-footer-logos img { width: 48px; height: 48px; } .sinaya-footer { margin-top: 32px; } }
